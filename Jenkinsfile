@@ -51,7 +51,7 @@ pipeline {
                     sshagent(['app-server']) {
 
                         sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@172.31.26.228 << 'EOF'
+                        ssh -o StrictHostKeyChecking=no ubuntu@172.31.26.228 << EOF
 
                         mkdir -p /opt/payment-service
                         cd /opt/payment-service
