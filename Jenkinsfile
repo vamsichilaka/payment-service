@@ -51,7 +51,7 @@ pipeline {
                     sshagent(['app-server']) {
 
                         sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@172.31.26.228 << EOF
+                        ssh -o StrictHostKeyChecking=no ubuntu@172.31.26.228 << 'EOF'
 
                         mkdir -p /opt/payment-service
                         cd /opt/payment-service
@@ -66,7 +66,7 @@ pipeline {
 
                         nohup java -jar payment-service.jar > app.log 2>&1 &
 
-                        EOF
+EOF
                         '''
                     }
                 }
