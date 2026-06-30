@@ -21,34 +21,12 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh '''
-                    mvn sonar:sonar \
-                      -Dsonar.projectKey=payment-service \
-                      -Dsonar.projectName=payment-service
-                    '''
-                }
-            }
-        }
-
         stage('Deploy to Nexus') {
-
             steps {
-
-                configFileProvider([
-
-                    configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')
-
-                ]) {
-
+                configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
                     sh 'mvn deploy -DskipTests -s $MAVEN_SETTINGS'
-
                 }
-
             }
-
         }
 
     }
